@@ -139,7 +139,7 @@ public final class MailSaver extends Observable {
 		try {
 			while ((line = reader.readLine()) != null) {
 				if (++lineNb > lineNbToStartCopy) {
-					sb.append(line).append(LINE_SEPARATOR);
+					sb.append(line).append("\r\n");
 				}
 			}
 		} catch (IOException e) {
@@ -171,7 +171,7 @@ public final class MailSaver extends Observable {
 			} else {
 				iStr = "";
 			}
-			file = new File(filePath + iStr + Configuration.INSTANCE.get("emails.suffix"));
+			file = new File(filePath + iStr + "-" + getSubjectFromStr(mailContent).replaceAll("\\W+","") + Configuration.INSTANCE.get("emails.suffix"));
 		}
 
 		// Copy String to file
